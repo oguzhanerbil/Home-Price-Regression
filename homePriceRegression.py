@@ -62,7 +62,10 @@ kacinci_kat = np.array(kacinci_kat)
 sehir = np.array(data["Şehir"].values)
 fiyat = np.array(fiyat_veri)
 metrekare = np.array(metrekare)
+tur = np.array(data["Türü"].values)
 
-data = {"fiyat":fiyat,"sehir":sehir,"metrekare":metrekare,"Bulunduğu Kat": kacinci_kat,"Oda Sayısı":oda_sayisi}
+data = {"fiyat":fiyat,"sehir":sehir,"metrekare":metrekare,"Bulunduğu Kat": kacinci_kat,"Oda Sayısı":oda_sayisi,"Tür":tur}
 data = pd.DataFrame(data)
+
+data.to_csv("CleanData.csv")
 print(data)
