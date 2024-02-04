@@ -14,7 +14,7 @@ Ev özellikleri verilerinin barındıran dosyamda şu bilgiler yer almaktadır:
 * Isıtma Tipi
 * Oda Sayısı
 * Tür
-...
+* ...
 
 ## Modelleme
 
