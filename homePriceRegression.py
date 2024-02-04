@@ -8,6 +8,7 @@ import re
 # Düz Giriş (Zemin) sayısı 616
 # Çatı Katı sayısı 131
 # Bahçe Katı sayısı 414
+# EŞYA DURUMUNDA 7398 veri nan
 def metinden_sayi_cikarma(metin):
   sayi = re.findall(r"\d+", metin)
   if sayi:
@@ -46,7 +47,21 @@ def oda_sayisi_format(oda):
     else:
        return None
 data = pd.read_csv("TopluVeriler.csv")
+isitma_tipi = data["Isıtma Tipi"]
+print(isitma_tipi[1])
+for a in range(len(isitma_tipi)):
+   isitma_tipi[a] = isitma_tipi[a].strip()
 
+print(np.unique(isitma_tipi))
+"""
+['Doğalgaz Sobalı' 'Elektrikli Radyatör' 'Fancoil Ünitesi'
+ 'Güneş Enerjisi' 'Isı Pompası' 'Isıtma Yok' 'Jeotermal' 'Kat Kaloriferi'
+ 'Klimalı' 'Kombi Doğalgaz' 'Kombi Doğalgaz ' 'Kombi Fueloil'
+ 'Kombi Fueloil ' 'Kombi Katı Yakıt' 'Kombi Kömür' 'Merkezi (Pay Ölçer)'
+ 'Merkezi (Pay Ölçer) ' 'Merkezi Doğalgaz' 'Merkezi Doğalgaz '
+ 'Merkezi Fueloil' 'Merkezi Kömür' 'Sobalı' 'Sobalı ' 'VRV'
+ 'Yerden Isıtma' 'Yerden Isıtma ' 'Şömine']
+"""
 fiyat = data["Fiyat"].values
 metrekare = data["Net Metrekare"].values
 bulundugu_kat = data["Bulunduğu Kat"].values
@@ -63,9 +78,10 @@ sehir = np.array(data["Şehir"].values)
 fiyat = np.array(fiyat_veri)
 metrekare = np.array(metrekare)
 tur = np.array(data["Türü"].values)
-
-data = {"fiyat":fiyat,"sehir":sehir,"metrekare":metrekare,"Bulunduğu Kat": kacinci_kat,"Oda Sayısı":oda_sayisi,"Tür":tur}
+isitma_tipi = np.array(isitma_tipi)
+print(len(tur))
+print(len(isitma_tipi))
+data = {"fiyat":fiyat,"sehir":sehir,"metrekare":metrekare,"Bulunduğu Kat": kacinci_kat,"Oda Sayısı":oda_sayisi,"Tür":tur,"Isıtma Tipi":isitma_tipi}# 
 data = pd.DataFrame(data)
 
 data.to_csv("CleanData.csv")
-print(data)
