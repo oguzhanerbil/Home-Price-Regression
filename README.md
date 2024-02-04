@@ -9,11 +9,11 @@ Ben bu projede verileri ilk önce normalize ettim daha sonra geriye kalan verile
 Verileri nasıl elde ettiğim hakkındaki bilgiyi [buradan](https://github.com/oguzhanerbil/Web-Scraping) bulabilirsiniz.
 
 Ev özellikleri verilerinin barındıran dosyamda şu bilgiler yer almaktadır:
-• Fiyat
-• Şehir
-• Isıtma Tipi
-• Oda Sayısı
-• Tür
+* Fiyat
+* Şehir
+* Isıtma Tipi
+* Oda Sayısı
+* Tür
 ...
 
 ## Modelleme
