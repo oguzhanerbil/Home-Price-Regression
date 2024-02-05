@@ -46,42 +46,53 @@ def oda_sayisi_format(oda):
         return int(liste[0])+int(liste[1])
     else:
        return None
+def bina_yas_format(yas):
+   if str(yas) == "0 (Yeni)":
+      return 0
+   if str(yas) == "1":
+      return 1
+   if str(yas) == "11-15":
+      return 13
+   if str(yas) == "16-20":
+      return 18
+   if str(yas) == "21 Ve Üzeri":
+      return 25
+   if str(yas) == "3":
+      return 3
+   if str(yas) == "4":
+      return 4
+   if str(yas) == "5-10":
+      return 7
 data = pd.read_csv("TopluVeriler.csv")
-isitma_tipi = data["Isıtma Tipi"]
-print(isitma_tipi[1])
-for a in range(len(isitma_tipi)):
-   isitma_tipi[a] = isitma_tipi[a].strip()
 
-print(np.unique(isitma_tipi))
-"""
-['Doğalgaz Sobalı' 'Elektrikli Radyatör' 'Fancoil Ünitesi'
- 'Güneş Enerjisi' 'Isı Pompası' 'Isıtma Yok' 'Jeotermal' 'Kat Kaloriferi'
- 'Klimalı' 'Kombi Doğalgaz' 'Kombi Doğalgaz ' 'Kombi Fueloil'
- 'Kombi Fueloil ' 'Kombi Katı Yakıt' 'Kombi Kömür' 'Merkezi (Pay Ölçer)'
- 'Merkezi (Pay Ölçer) ' 'Merkezi Doğalgaz' 'Merkezi Doğalgaz '
- 'Merkezi Fueloil' 'Merkezi Kömür' 'Sobalı' 'Sobalı ' 'VRV'
- 'Yerden Isıtma' 'Yerden Isıtma ' 'Şömine']
-"""
+
+
+
+isitma_tipi = data["Isıtma Tipi"]
+isitma_tipi = isitma_tipi.astype(str)
+bina_yas = data["Binanın Yaşı"].values
 fiyat = data["Fiyat"].values
 metrekare = data["Net Metrekare"].values
 bulundugu_kat = data["Bulunduğu Kat"].values
 oda_sayisi = data["Oda Sayısı"].values
 
+bina_yas = [bina_yas_format(yas) for yas in bina_yas]
+fiyat_veri = [fiyat_format(s) for s in fiyat]
 metrekare = [metinden_sayi_cikarma(metin) for metin in metrekare]
 kacinci_kat = [metinden_kat_cikarma(kat) for kat in bulundugu_kat]
-fiyat_veri = [fiyat_format(s) for s in fiyat]
 oda_sayisi = [oda_sayisi_format(oda) for oda in oda_sayisi]
+isitma_tipi = [s.strip() for s in isitma_tipi]
 
-oda_sayisi = np.array(oda_sayisi)
-kacinci_kat = np.array(kacinci_kat)
-sehir = np.array(data["Şehir"].values)
+bina_yas = np.array(bina_yas)
 fiyat = np.array(fiyat_veri)
 metrekare = np.array(metrekare)
+kacinci_kat = np.array(kacinci_kat)
+oda_sayisi = np.array(oda_sayisi)
+sehir = np.array(data["Şehir"].values)
 tur = np.array(data["Türü"].values)
 isitma_tipi = np.array(isitma_tipi)
-print(len(tur))
-print(len(isitma_tipi))
-data = {"fiyat":fiyat,"sehir":sehir,"metrekare":metrekare,"Bulunduğu Kat": kacinci_kat,"Oda Sayısı":oda_sayisi,"Tür":tur,"Isıtma Tipi":isitma_tipi}# 
+
+data = {"fiyat":fiyat,"sehir":sehir,"metrekare":metrekare,"Bulunduğu Kat": kacinci_kat,"Oda Sayısı":oda_sayisi,"Tür":tur,"Isıtma Tipi":isitma_tipi,"Bina Yaş":bina_yas}# 
 data = pd.DataFrame(data)
 
 data.to_csv("CleanData.csv")
