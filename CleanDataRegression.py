@@ -10,6 +10,7 @@ from sklearn.model_selection import train_test_split,GridSearchCV,cross_val_scor
 from sklearn.tree import DecisionTreeRegressor
 
 data = pd.read_csv("CleanData.csv")
+
 # Sütunların bilgilerini verir
 # print(data.info())
 # Sütunlardaki verilerin min maks değerleri, ortalamaları gibi veriler
