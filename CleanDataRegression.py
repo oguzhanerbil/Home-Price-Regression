@@ -84,3 +84,4 @@ r_dt.fit(X,y)
 print(r_dt.predict(X))
 
 print("Modelin skoru: "+str(r_dt.score(X,y)))
+
