@@ -2,14 +2,10 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error,r2_score
 import matplotlib.pyplot as plt
-import seaborn as sns
-import xgboost as xgb
-from sklearn.model_selection import train_test_split,GridSearchCV,cross_val_score
 from sklearn.tree import DecisionTreeRegressor
 
-data = pd.read_csv("CleanData.csv")
+data = pd.read_csv("data.csv")
 
 # Sütunların bilgilerini verir
 # print(data.info())
@@ -28,9 +24,6 @@ data = pd.read_csv("CleanData.csv")
 # data["Bina Yaş"].value_counts().plot(kind="pie")
 # plt.ylabel("Yaş")
 
-data.drop(labels="Tür", inplace=True,axis=1)
-
-data.drop("Unnamed: 0",axis=1,inplace=True)
 
 # Etiketleme için sklearn kütüphanesi içerisinden LabelEncoder kullanacağız
 from sklearn.preprocessing import LabelEncoder
@@ -74,14 +67,20 @@ yeni_veri = pd.DataFrame({
 
 newData = data.copy()
 newData["sehir"] = le.fit_transform(newData["sehir"])
-newData["Isıtma Tipi"] = le.fit_transform(newData["Isıtma Tipi"])
-
-X = newData.drop(["fiyat"],axis=1)
+# newData["Isıtma Tipi"] = le.fit_transform(newData["Isıtma Tipi"])
+newData.drop("Unnamed: 0",axis=1,inplace=True)
+X = newData.iloc[:,1:8]
 y = newData["fiyat"]
 
 r_dt = DecisionTreeRegressor(random_state=0)
 r_dt.fit(X,y)
-print(r_dt.predict(X))
 
+print(r_dt.predict(X))
+print(newData.value_counts())
 print("Modelin skoru: "+str(r_dt.score(X,y)))
 
+
+
+import statsmodels.api as sm
+model = sm.OLS(y,X).fit()
+print(model.summary())
