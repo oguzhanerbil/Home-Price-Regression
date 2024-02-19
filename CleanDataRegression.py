@@ -26,9 +26,10 @@ data = pd.read_csv("data.csv")
 
 
 # Etiketleme için sklearn kütüphanesi içerisinden LabelEncoder kullanacağız
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder,OneHotEncoder
 
 le = LabelEncoder()
+ohe = OneHotEncoder()
 """
 newData = data.copy()
 data["sehir"] = le.fit_transform(data["sehir"])
@@ -65,21 +66,43 @@ yeni_veri = pd.DataFrame({
 # print("Modelin skoru: "+str(r_dt.score(X_test,y_test)))
 """
 
+# Bulunduğu Kat ve Oda Sayısı için LabelEncoder
+# sehir için OneHotEncoder
+
 newData = data.copy()
 newData["sehir"] = le.fit_transform(newData["sehir"])
+newData["Oda Sayısı"] = le.fit_transform(newData["Oda Sayısı"])
+newData["Bulunduğu Kat"] = le.fit_transform(newData["Bulunduğu Kat"])
+newData["Bina Yaş"] = le.fit_transform(newData["Bina Yaş"])
+
+sehir = ohe.fit_transform(newData["sehir"].values.reshape(-1,1)).toarray()
+
+sonuc = pd.DataFrame(data=sehir,index=range(len(sehir)),columns=["adana","antalya","bursa","canakkale","denizli","diyarbakir","eskisehir","gaziantep","kocaeli"])
+
+
+
 # newData["Isıtma Tipi"] = le.fit_transform(newData["Isıtma Tipi"])
+
+
+
 newData.drop("Unnamed: 0",axis=1,inplace=True)
-X = newData.iloc[:,1:8]
+newData.drop("sehir",axis=1,inplace=True)
+sonuc.drop("gaziantep",axis=1,inplace=True)
+# sonuc.drop("diyarbakir",axis=1,inplace=True)
+newData = pd.concat([newData,sonuc],axis=1)
+
+X = newData.iloc[:,1:]
 y = newData["fiyat"]
 
-r_dt = DecisionTreeRegressor(random_state=0)
+r_dt = DecisionTreeRegressor(random_state=1)
 r_dt.fit(X,y)
 
-print(r_dt.predict(X))
-print(newData.value_counts())
+#áprint(r_dt.predict(X))
+#print(newData.value_counts())
 print("Modelin skoru: "+str(r_dt.score(X,y)))
 
-
+from sklearn.metrics import mean_squared_error
+from math import sqrt
 
 import statsmodels.api as sm
 model = sm.OLS(y,X).fit()
