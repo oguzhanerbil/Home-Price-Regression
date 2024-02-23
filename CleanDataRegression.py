@@ -7,6 +7,9 @@ from sklearn.tree import DecisionTreeRegressor
 
 data = pd.read_csv("data.csv")
 
+# binanın kat sayısı
+# ısıtma tipi
+
 # Sütunların bilgilerini verir
 # print(data.info())
 # Sütunlardaki verilerin min maks değerleri, ortalamaları gibi veriler
@@ -70,13 +73,20 @@ yeni_veri = pd.DataFrame({
 # sehir için OneHotEncoder
 
 newData = data.copy()
+print(newData["sehir"].unique())
+
+
 newData["sehir"] = le.fit_transform(newData["sehir"])
 newData["Oda Sayısı"] = le.fit_transform(newData["Oda Sayısı"])
 newData["Bulunduğu Kat"] = le.fit_transform(newData["Bulunduğu Kat"])
 newData["Bina Yaş"] = le.fit_transform(newData["Bina Yaş"])
 
 sehir = ohe.fit_transform(newData["sehir"].values.reshape(-1,1)).toarray()
-
+print(newData["Binanın Kat Sayısı"].value_counts())
+print(newData["sehir"].value_counts())
+print(newData["Oda Sayısı"].value_counts())
+print(newData["Bulunduğu Kat"].value_counts())
+print(newData["Bina Yaş"].value_counts())
 sonuc = pd.DataFrame(data=sehir,index=range(len(sehir)),columns=["adana","antalya","bursa","canakkale","denizli","diyarbakir","eskisehir","gaziantep","kocaeli"])
 
 
