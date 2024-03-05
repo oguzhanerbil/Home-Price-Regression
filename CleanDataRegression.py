@@ -5,7 +5,7 @@ from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeRegressor
 
-data = pd.read_csv("data.csv")
+data = pd.read_csv("DataSon.csv")
 
 # binanın kat sayısı
 # ısıtma tipi
@@ -77,17 +77,16 @@ print(newData["sehir"].unique())
 
 
 newData["sehir"] = le.fit_transform(newData["sehir"])
-newData["Oda Sayısı"] = le.fit_transform(newData["Oda Sayısı"])
 newData["Bulunduğu Kat"] = le.fit_transform(newData["Bulunduğu Kat"])
 newData["Bina Yaş"] = le.fit_transform(newData["Bina Yaş"])
+newData["Isıtma Tipi"] = le.fit_transform(newData["Isıtma Tipi"])
 
 sehir = ohe.fit_transform(newData["sehir"].values.reshape(-1,1)).toarray()
 print(newData["Binanın Kat Sayısı"].value_counts())
 print(newData["sehir"].value_counts())
-print(newData["Oda Sayısı"].value_counts())
 print(newData["Bulunduğu Kat"].value_counts())
 print(newData["Bina Yaş"].value_counts())
-sonuc = pd.DataFrame(data=sehir,index=range(len(sehir)),columns=["adana","antalya","bursa","canakkale","denizli","diyarbakir","eskisehir","gaziantep","kocaeli"])
+sonuc = pd.DataFrame(data=sehir,index=range(len(sehir)),columns=["antalya","bursa","canakkale","denizli","eskisehir","gaziantep","kirklareli","kocaeli"])
 
 
 

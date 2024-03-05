@@ -65,7 +65,7 @@ def bina_yas_format(yas):
       return 7
 data = pd.read_csv("TopluVeriler.csv")
 
-
+data5 = data
 
 
 isitma_tipi = data["Isıtma Tipi"]
@@ -75,6 +75,7 @@ fiyat = data["Fiyat"].values
 metrekare = data["Net Metrekare"].values
 bulundugu_kat = data["Bulunduğu Kat"].values
 oda_sayisi = data["Oda Sayısı"].values
+binanin_kat_sayisi = data["Binanın Kat Sayısı"].values
 
 bina_yas = [bina_yas_format(yas) for yas in bina_yas]
 fiyat_veri = [fiyat_format(s) for s in fiyat]
@@ -91,8 +92,9 @@ oda_sayisi = np.array(oda_sayisi)
 sehir = np.array(data["Şehir"].values)
 tur = np.array(data["Türü"].values)
 isitma_tipi = np.array(isitma_tipi)
+binanin_kat_sayisi = np.array(binanin_kat_sayisi)
 
-data = {"fiyat":fiyat,"sehir":sehir,"metrekare":metrekare,"Bulunduğu Kat": kacinci_kat,"Oda Sayısı":oda_sayisi,"Tür":tur,"Isıtma Tipi":isitma_tipi,"Bina Yaş":bina_yas}# 
+data = {"fiyat":fiyat,"sehir":sehir,"metrekare":metrekare,"Bulunduğu Kat": kacinci_kat,"Oda Sayısı":oda_sayisi,"Tür":tur,"Isıtma Tipi":isitma_tipi,"Bina Yaş":bina_yas, "Binanın Kat Sayısı":binanin_kat_sayisi}# 
 data = pd.DataFrame(data)
 
 data.to_csv("CleanData.csv")
