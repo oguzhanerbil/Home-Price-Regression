@@ -89,14 +89,10 @@ print(newData["Bina Yaş"].value_counts())
 sonuc = pd.DataFrame(data=sehir,index=range(len(sehir)),columns=["antalya","bursa","canakkale","denizli","eskisehir","gaziantep","kirklareli","kocaeli"])
 
 
-
-# newData["Isıtma Tipi"] = le.fit_transform(newData["Isıtma Tipi"])
-
-
-
 newData.drop("Unnamed: 0",axis=1,inplace=True)
 newData.drop("sehir",axis=1,inplace=True)
-sonuc.drop("gaziantep",axis=1,inplace=True)
+sonuc.drop("antalya",axis=1,inplace=True)
+# sonuc.drop("gaziantep",axis=1,inplace=True)
 # sonuc.drop("diyarbakir",axis=1,inplace=True)
 newData = pd.concat([newData,sonuc],axis=1)
 
