@@ -102,8 +102,8 @@ y = newData["fiyat"]
 r_dt = DecisionTreeRegressor(random_state=1)
 r_dt.fit(X,y)
 
-#áprint(r_dt.predict(X))
-#print(newData.value_counts())
+# print(r_dt.predict(X))
+# print(newData.value_counts())
 print("Modelin skoru: "+str(r_dt.score(X,y)))
 
 from sklearn.metrics import mean_squared_error
