@@ -33,3 +33,5 @@ Ana kullanılan kütüphaneler:
 * Scikit-learn: Makine öğrenimi modellemesi için kullanılmıştır.
 * Matplotlib ve Seaborn: Veri görselleştirme için kullanılmıştır.
 
+  ### Yardımlarından dolayı @yasinsahin0'a teşekkür ederim.
+
