@@ -7,9 +7,6 @@ from sklearn.tree import DecisionTreeRegressor
 
 data = pd.read_csv("DataSon.csv")
 
-# binanın kat sayısı
-# ısıtma tipi
-
 # Sütunların bilgilerini verir
 # print(data.info())
 # Sütunlardaki verilerin min maks değerleri, ortalamaları gibi veriler
@@ -33,67 +30,20 @@ from sklearn.preprocessing import LabelEncoder,OneHotEncoder
 
 le = LabelEncoder()
 ohe = OneHotEncoder()
-"""
-newData = data.copy()
-data["sehir"] = le.fit_transform(data["sehir"])
-data["Isıtma Tipi"] = le.fit_transform(data["Isıtma Tipi"])
-
-fiyat = float(input("Fiyat bilgisi giriniz: "))
-metrekare = float(input("Metrekareyi giriniz: "))
-kat = int(input("Bulunduğu katı giriniz: "))
-oda_sayisi = int(input("Oda sayısını giriniz: "))
-isitma_tipi = int(input("Isıtma tipini giriniz (0: Doğalgaz, 1: Kombi, 2: Elektrik): "))
-bina_yasi = int(input("Bina yaşını giriniz: "))
-sehir = int(input("Lütfen şehir giriniz: "))
-# Tahmin için veriyi hazırlama
-
-yeni_veri = pd.DataFrame({
-    "fiyat": [fiyat],
-    "sehir":[sehir],
-    "metrekare": [metrekare],
-    "Bulunduğu Kat": [kat],
-    "Oda Sayısı": [oda_sayisi],
-    "Isıtma Tipi": [isitma_tipi],
-    "Bina Yaş": [bina_yasi]
-})
-
-# X = yeni_veri.drop(["fiyat","sehir"],axis=1).head(200)
-# y = yeni_veri["fiyat"].head(200)
-
-
-# r_dt = DecisionTreeRegressor(random_state=0)
-# r_dt.fit(data.drop(["fiyat"],axis=1),data["fiyat"])
-# print(r_dt.predict(yeni_veri.drop("fiyat",axis=1)))
-# print(y_test[15:20])
-
-# print("Modelin skoru: "+str(r_dt.score(X_test,y_test)))
-"""
-
-# Bulunduğu Kat ve Oda Sayısı için LabelEncoder
-# sehir için OneHotEncoder
 
 newData = data.copy()
-print(newData["sehir"].unique())
-
-
 newData["sehir"] = le.fit_transform(newData["sehir"])
 newData["Bulunduğu Kat"] = le.fit_transform(newData["Bulunduğu Kat"])
 newData["Bina Yaş"] = le.fit_transform(newData["Bina Yaş"])
 newData["Isıtma Tipi"] = le.fit_transform(newData["Isıtma Tipi"])
 
 sehir = ohe.fit_transform(newData["sehir"].values.reshape(-1,1)).toarray()
-print(newData["Binanın Kat Sayısı"].value_counts())
-print(newData["sehir"].value_counts())
-print(newData["Bulunduğu Kat"].value_counts())
-print(newData["Bina Yaş"].value_counts())
 sonuc = pd.DataFrame(data=sehir,index=range(len(sehir)),columns=["antalya","bursa","canakkale","denizli","eskisehir","gaziantep","kirklareli","kocaeli"])
 
 
 newData.drop("Unnamed: 0",axis=1,inplace=True)
 newData.drop("sehir",axis=1,inplace=True)
 sonuc.drop("antalya",axis=1,inplace=True)
-# sonuc.drop("gaziantep",axis=1,inplace=True)
-# sonuc.drop("diyarbakir",axis=1,inplace=True)
 newData = pd.concat([newData,sonuc],axis=1)
 
 X = newData.iloc[:,1:]
