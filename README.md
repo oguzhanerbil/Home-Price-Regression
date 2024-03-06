@@ -29,7 +29,7 @@ Model, veri setindeki ev özelliklerini kullanarak fiyat tahminleri yapmaktadır
 
 Ana kullanılan kütüphaneler:
 
-• Pandas: Veri manipülasyonu ve analizi için kullanılmıştır.
-• Scikit-learn: Makine öğrenimi modellemesi için kullanılmıştır.
-• Matplotlib ve Seaborn: Veri görselleştirme için kullanılmıştır.
+* Pandas: Veri manipülasyonu ve analizi için kullanılmıştır.
+* Scikit-learn: Makine öğrenimi modellemesi için kullanılmıştır.
+* Matplotlib ve Seaborn: Veri görselleştirme için kullanılmıştır.
 
