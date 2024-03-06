@@ -1,9 +1,8 @@
 # Ev Fiyat Tahmini Projesi
  
 
-Bu proje, Evlerin çeşitli özelliklerine (metrekare, bulunduğu kat, oda sayısı, tür, ısıtma tipi) dayanarak evlerin fiyatlarını tahmin etmeyi amaçlamaktadır. Proje, [doldurulacak] gibi teknikleri kullanarak, veri setindeki mevcut ev özelliklerinden yola çıkarak ev fiyatlarını etkili bir şekilde tahmin edebilmektedir.
+Bu proje, Evlerin çeşitli özelliklerine (metrekare, bulunduğu kat, oda sayısı, tür, ısıtma tipi, vb) dayanarak evlerin fiyatlarını tahmin etmeyi amaçlamaktadır. Proje, Karar ağacı tekniği kullanılarak, veri setindeki mevcut ev özelliklerinden yola çıkarak ev fiyatlarını etkili bir şekilde tahmin edebilmektedir. Siz eğer isterseniz diğer teknikleri kullanarak modelin doğruluk oranında nasıl bir değişim olduğunu gözlemleyebilir ve buna göre kendi çıkarımlarınızı yapabilirsiniz.
 Etkili bir şekilde tahmin yapabilen algoritma geliştirebilmek için elimizde olan veri setindeki bozuk verileri temizlemeliyiz veya kullanılabilir bir hale getirmeliyiz. Şehir bilgisi gibi kategorik veriler, model tarafından işlenebilir bir hale getirmek için sayısal formata dönüştürülmelidir.
-Ben bu projede verileri ilk önce normalize ettim daha sonra geriye kalan veriler ile yoluma devam ederek çok daha iyi tahminler etmeyi başarabildim.
 
 ## Veri Seti
 Verileri nasıl elde ettiğim hakkındaki bilgiyi [buradan](https://github.com/oguzhanerbil/Web-Scraping) bulabilirsiniz.
@@ -11,10 +10,11 @@ Verileri nasıl elde ettiğim hakkındaki bilgiyi [buradan](https://github.com/o
 Ev özellikleri verilerinin barındıran dosyamda şu bilgiler yer almaktadır:
 * Fiyat
 * Şehir
+* Metrekare
+* Bulunduğu Kat
 * Isıtma Tipi
-* Oda Sayısı
-* Tür
-* ...
+* Bine Yaşı
+* Binanın Kat Sayısı
 
 ## Modelleme
 
